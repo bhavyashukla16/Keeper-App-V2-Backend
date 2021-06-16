@@ -22,11 +22,11 @@ await mongoose.connect(process.env.MONGOPATH, { useNewUrlParser: true, useUnifie
     //handleError(error)
 });
 
-app.use('/notes', notesRoutes)
-
 app.get('/', (req, res) => {
     res.send("Welcome to server!")
 })
+
+app.use('/notes', notesRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
