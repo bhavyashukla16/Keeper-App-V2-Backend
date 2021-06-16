@@ -11,20 +11,15 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 
-try {
-    await mongoose.connect(process.env.MONGOPATH, { keepAlive: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-    .then(x => {
-        console.log(
-            `Connected to Mongo! Database name: "${x.connections[0].name}"`,
-        );
-    })
-    .catch(err => {
-        console.error('Error connecting to mongo', err);
-    });
-}
-catch(err) {
-    console.log(err)
-} 
+await mongoose.connect(process.env.MONGOPATH, { keepAlive: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+.then(x => {
+    console.log(
+        `Connected to Mongo! Database name: "${x.connections[0].name}"`,
+    );
+})
+.catch(err => {
+    console.error('Error connecting to mongo', err);
+});
 
 app.use('/notes', notesRoutes)
 
