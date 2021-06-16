@@ -19,7 +19,7 @@ await mongoose.connect(process.env.MONGOPATH, { useNewUrlParser: true, useUnifie
 })
 .catch(err => {
     console.error('Error connecting to mongo', err);
-    handleError(error)
+    //handleError(error)
 });
 
 app.use('/notes', notesRoutes)
