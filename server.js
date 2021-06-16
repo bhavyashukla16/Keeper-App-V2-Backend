@@ -17,11 +17,12 @@ app.get('/', (req, res) => {
     res.send("Welcome to server!")
 })
 
-mongoose.connect(process.env.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then(() => {
-    console.log(`Server running on port ${PORT}`)
-}).catch((err) => {
+try {
+    await mongoose.connect(process.env.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+}
+catch(err) {
     console.log(err)
-})
+} 
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
