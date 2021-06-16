@@ -12,7 +12,7 @@ export const getNotes = async(req, res) => {
     catch(error) {
         res.status(404). json({
             success: 0,
-            message: err.message
+            message: error.message
         })
     }
 }
