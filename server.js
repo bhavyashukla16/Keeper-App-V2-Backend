@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 
-await mongoose.connect(process.env.MONGOPATH, { keepAlive: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+await mongoose.connect(process.env.MONGOPATH, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
 .then(x => {
     console.log(
         `Connected to Mongo! Database name: "${x.connections[0].name}"`,
