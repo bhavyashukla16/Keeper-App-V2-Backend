@@ -1,28 +1,36 @@
 import express from 'express'
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
 import cors from 'cors'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config();
 import notesRoutes from './routes/notes.js'
 const app = express();
-dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 
+try {
+    await mongoose.connect(process.env.MONGOPATH, { keepAlive: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+    .then(x => {
+        console.log(
+            `Connected to Mongo! Database name: "${x.connections[0].name}"`,
+        );
+    })
+    .catch(err => {
+        console.error('Error connecting to mongo', err);
+    });
+}
+catch(err) {
+    console.log(err)
+} 
+
 app.use('/notes', notesRoutes)
 
 app.get('/', (req, res) => {
     res.send("Welcome to server!")
 })
-
-try {
-    await mongoose.connect(process.env.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-}
-catch(err) {
-    console.log(err)
-} 
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
