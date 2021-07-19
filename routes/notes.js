@@ -7,5 +7,6 @@ router.get('/', getNotes)
 router.post('/', addNote)
 router.delete('/:id', deleteNode)
 router.put('/:id', editNote)
+//router.patch(':/id', pinNote)
 
 export default router

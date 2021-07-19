@@ -5,7 +5,8 @@ const notesSchema = new Schema({
         type: String,
         required: true
     },
-    content: String
+    content: String,
+    pinned: Boolean
 }, {timestamps: true})
 
 const Notes = mongoose.model('notes', notesSchema)
